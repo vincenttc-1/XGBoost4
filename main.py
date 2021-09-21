@@ -8,8 +8,6 @@ Original file is located at
 
 # Commented out IPython magic to ensure Python compatibility.
 import pandas as pd
-import re
-import string
 from flask import Flask,jsonify,request
 from sklearn.feature_extraction.text import TfidfVectorizer
 import xgboost
@@ -18,6 +16,8 @@ from flask_cors import CORS
 import json
 from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
 from Sastrawi.StopWordRemover.StopWordRemoverFactory import StopWordRemoverFactory, StopWordRemover, ArrayDictionary
+import re
+import string
 
 #nltk.download('punkt')
 
