@@ -94,37 +94,33 @@ def sentece():
 @app.route('/api/file', methods=["POST"])
 def byFile():
     request_data = request.get_json()
-    data_komentar = request_data['data']
+    judul_berita = request_data['data']
 
     arr_text = []
 
-    for f in data_komentar :
+    for f in judul_berita :
       arr_text.append(f)
 
     clean_arr_text = list(map(text_preproc,arr_text))
     x_sentence = vectorizer.transform(clean_arr_text)
     predict = loaded_model.predict(x_sentence)
 
-    kalimats = []
+    juduls = []
     prediksis = []
-    # resp['kalimats'] = [None]
-    # resp['prediksis'] = [None]
     for count,f in enumerate(predict) :
-      kalimat = arr_text[count],
+      judul = arr_text[count],
       prediksi = int(f)
-      kalimats.append(kalimat)
+      juduls.append(judul)
       prediksis.append(prediksi)
-      # resp['kalimats'].append(kalimat)
-      # resp['prediksis'].append(prediksi)
 
-    return jsonify({"text":kalimats,"predictions":prediksis})
+    return jsonify({"text":juduls,"predictions":prediksis})
 
-@app.route('/api/testjson', methods=["POST"])
-def postJsonHandler():
-    print (request.is_json)
-    content = request.get_json()
-    print (content)
-    return 'JSON posted'
+  # @app.route('/api/testjson', methods=["POST"])
+  # def postJsonHandler():
+  #     print (request.is_json)
+  #     content = request.get_json()
+  #     print (content)
+  #     return 'JSON posted'
 
 if __name__ == '__main__':
     # Threaded option to enable multiple instances for multiple user access support
